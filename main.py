@@ -3,7 +3,20 @@ def main():
     text = get_book_text(book_path)
     num_words = get_num_words(text)
     knew = get_chars_dict(text)
-    generate_report(knew)
+    report = generate_report(knew)
+
+
+    print(f"--- Begin report of {book_path} ---")
+    print(f"{num_words} words found in the document")
+    print()
+
+    for i in report:
+        if not i[0].isalpha():
+            continue
+        print(f"the {i[0]} character was found {i[1]} times")
+    
+    print()
+    print("--- End report ---")
 
     
     
@@ -28,18 +41,12 @@ def get_chars_dict(text):
 
 def generate_report(dictionary):
     new_list = []
-    print("--- Begin report of books/frankenstein.txt ---") 
-    print("77986 words found in the document")
-    print(" ")
     for x in dictionary:
-        if x.isalpha():
-             t = x,dictionary[x]
-             new_list.append(t)
+        t = x,dictionary[x]
+        new_list.append(t)
     new_list.sort(key = lambda tup: tup[1], reverse=True )
-    for y in new_list:
-        print(f"The {y[0]} was found {y[1]} times")
-    print(" ")
-    print("--- End of report ---")
+
+    return new_list
 
 
           
